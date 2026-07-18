@@ -4,6 +4,7 @@ import { useOrders, useUpdateOrderStatus } from '@/hooks/useOrders'
 import { useAppStore, selectEntityId } from '@/store/useAppStore'
 import { formatAED, timeAgo } from '@/lib/utils'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import type { OrderStatus } from '@/types'
 
 const STATUS_STYLE: Record<string, { bg: string; text: string; dot: string }> = {
@@ -16,6 +17,7 @@ const STATUS_STYLE: Record<string, { bg: string; text: string; dot: string }> = 
 const FILTERS: (OrderStatus | 'All')[] = ['All', 'Pending', 'Confirmed', 'Delivered', 'Cancelled']
 
 export default function SupplierOrdersPage() {
+  const router                  = useRouter()
   const supplierId              = useAppStore(selectEntityId) ?? undefined
   const { data: allOrders }     = useOrders({ supplierId })
   const { mutate: updateStatus, isPending } = useUpdateOrderStatus()
@@ -82,7 +84,8 @@ export default function SupplierOrdersPage() {
               return (
                 <tr
                   key={order.id}
-                  className="hover:bg-[#F9FAFB] transition-colors"
+                  onClick={() => router.push(`/supplier/dashboard/orders/${order.id}`)}
+                  className="hover:bg-[#F9FAFB] transition-colors cursor-pointer"
                   style={{
                     backgroundColor: idx % 2 === 0 ? '#ffffff' : '#FAFAF9',
                     borderTop: '1px solid #E5E7EB',
@@ -102,16 +105,27 @@ export default function SupplierOrdersPage() {
                       {order.status}
                     </span>
                   </td>
-                  <td className="py-3.5 px-5">
+                  <td className="py-3.5 px-5" onClick={(e) => e.stopPropagation()}>
                     {order.status === 'Pending' && (
-                      <button
-                        onClick={() => updateStatus({ id: order.id, status: 'Confirmed' })}
-                        disabled={isPending}
-                        className="text-xs font-semibold px-3 py-1.5 rounded-md text-white bg-creek-500 hover:opacity-90 transition-opacity disabled:opacity-60"
-                        type="button"
-                      >
-                        Confirm
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => updateStatus({ id: order.id, status: 'Confirmed' })}
+                          disabled={isPending}
+                          className="text-xs font-semibold px-3 py-1.5 rounded-md text-white bg-creek-500 hover:opacity-90 transition-opacity disabled:opacity-60"
+                          type="button"
+                        >
+                          Confirm
+                        </button>
+                        <button
+                          onClick={() => updateStatus({ id: order.id, status: 'Cancelled' })}
+                          disabled={isPending}
+                          className="text-xs font-semibold px-3 py-1.5 rounded-md hover:bg-[#FEF2F2] transition-colors disabled:opacity-60"
+                          style={{ color: '#991B1B', border: '1px solid #FECACA' }}
+                          type="button"
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     )}
                     {order.status === 'Confirmed' && (
                       <button

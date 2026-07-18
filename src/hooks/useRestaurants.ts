@@ -2,6 +2,7 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase/client'
+import { authedFetch } from '@/lib/utils'
 import { mapRestaurant } from '@/lib/supabase/mappers'
 import type { Restaurant } from '@/types'
 
@@ -11,7 +12,7 @@ export function useRestaurants(activeOnly = false) {
     queryFn: async () => {
       const p = new URLSearchParams()
       if (activeOnly) p.set('active', 'true')
-      const res = await fetch(`/api/restaurants?${p.toString()}`)
+      const res = await authedFetch(`/api/restaurants?${p.toString()}`)
       if (!res.ok) throw new Error('Failed to fetch restaurants')
       const data = await res.json()
       return (data as object[]).map(mapRestaurant)
@@ -24,7 +25,7 @@ export function useRestaurant(id: string) {
   const query = useQuery({
     queryKey: ['restaurants', id],
     queryFn: async () => {
-      const res = await fetch(`/api/restaurants?id=${encodeURIComponent(id)}`)
+      const res = await authedFetch(`/api/restaurants?id=${encodeURIComponent(id)}`)
       if (!res.ok) throw new Error('Failed to fetch restaurant')
       return mapRestaurant(await res.json())
     },
@@ -37,7 +38,7 @@ export function useRestaurantsBySupplier(supplierId: string) {
   const query = useQuery({
     queryKey: ['restaurants', { supplierId }],
     queryFn: async () => {
-      const res = await fetch(`/api/restaurants?supplier_id=${encodeURIComponent(supplierId)}`)
+      const res = await authedFetch(`/api/restaurants?supplier_id=${encodeURIComponent(supplierId)}`)
       if (!res.ok) throw new Error('Failed to fetch restaurants')
       const data = await res.json()
       return (data as object[]).map(mapRestaurant)

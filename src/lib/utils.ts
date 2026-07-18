@@ -1,3 +1,17 @@
+import { supabase } from '@/lib/supabase/client'
+
+/** Fetch wrapper that attaches the current Supabase session token as Bearer auth. */
+export async function authedFetch(input: string, init: RequestInit = {}): Promise<Response> {
+  const token = (await supabase.auth.getSession()).data.session?.access_token
+  return fetch(input, {
+    ...init,
+    headers: {
+      ...(init.headers ?? {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  })
+}
+
 /** Format a number as AED currency. e.g. 2450 → "AED 2,450" */
 export function formatAED(amount: number, compact = false): string {
   if (compact && amount >= 1_000_000) {

@@ -153,6 +153,8 @@ export const MOCK_ORDERS: Order[] = [
     supplierName: 'Al Khaleej Fresh Farms',
     status: 'Delivered',
     amount: 2450,
+    taxAmount: 116.67,
+    deliveryAddress: 'Main Kitchen — Al Rigga Road, Deira, Dubai',
     source: 'WhatsApp',
     items: [
       { id: 'i1', name: 'Tomatoes', qty: 20, unit: 'kg', confidence: 0.97 },
@@ -170,6 +172,8 @@ export const MOCK_ORDERS: Order[] = [
     supplierName: 'Dubai Fresh Co.',
     status: 'Confirmed',
     amount: 1890,
+    taxAmount: 90.00,
+    deliveryAddress: 'Marina Restaurant — Marina Walk, Dubai Marina',
     source: 'WhatsApp',
     items: [
       { id: 'i4', name: 'Hammour Fish', qty: 10, unit: 'kg', confidence: 0.92 },
@@ -186,6 +190,8 @@ export const MOCK_ORDERS: Order[] = [
     supplierName: 'Green Valley Organics',
     status: 'Pending',
     amount: 890,
+    taxAmount: 42.38,
+    deliveryAddress: 'Downtown Café — Sheikh Mohammed bin Rashid Blvd, Downtown Dubai',
     source: 'Portal',
     items: [
       { id: 'i6', name: 'Sourdough Loaves', qty: 20, unit: 'pcs' },
@@ -202,6 +208,8 @@ export const MOCK_ORDERS: Order[] = [
     supplierName: 'Al Khaleej Fresh Farms',
     status: 'Pending',
     amount: 3200,
+    taxAmount: 152.38,
+    deliveryAddress: 'Sheikh Zayed Bistro — Sheikh Zayed Road, Al Quoz',
     source: 'WhatsApp',
     items: [
       { id: 'i8', name: 'Lamb Leg', qty: 8, unit: 'kg', confidence: 0.91 },
@@ -218,6 +226,8 @@ export const MOCK_ORDERS: Order[] = [
     supplierName: 'Dubai Fresh Co.',
     status: 'Delivered',
     amount: 5670,
+    taxAmount: 270.00,
+    deliveryAddress: 'Deira Palace Hotel — Al Muraqqabat Street, Deira',
     source: 'WhatsApp',
     items: [
       { id: 'i10', name: 'Whole Chicken', qty: 30, unit: 'pcs', confidence: 0.98 },
@@ -231,25 +241,25 @@ export const MOCK_ORDERS: Order[] = [
 // ─── Inventory (Supplier-owned) ────────────────────────────────────────────
 
 export const MOCK_INVENTORY: InventoryItem[] = [
-  { id: 'inv-001', supplierId: 'sup-001', name: 'Tomatoes', category: 'Fresh Produce', stockQty: 450, unit: 'kg', reorderThreshold: 100, status: 'In Stock', updatedAt: '2026-06-22T06:00:00Z' },
-  { id: 'inv-002', supplierId: 'sup-001', name: 'Cucumbers', category: 'Fresh Produce', stockQty: 280, unit: 'kg', reorderThreshold: 80, status: 'In Stock', updatedAt: '2026-06-22T06:00:00Z' },
-  { id: 'inv-003', supplierId: 'sup-001', name: 'Fresh Mint', category: 'Herbs & Spices', stockQty: 35, unit: 'bunches', reorderThreshold: 40, status: 'Low Stock', updatedAt: '2026-06-22T06:00:00Z' },
-  { id: 'inv-004', supplierId: 'sup-001', name: 'Coriander', category: 'Herbs & Spices', stockQty: 0, unit: 'bunches', reorderThreshold: 30, status: 'Out of Stock', updatedAt: '2026-06-21T18:00:00Z' },
-  { id: 'inv-005', supplierId: 'sup-001', name: 'Potatoes', category: 'Fresh Produce', stockQty: 820, unit: 'kg', reorderThreshold: 200, status: 'In Stock', updatedAt: '2026-06-22T06:00:00Z' },
-  { id: 'inv-006', supplierId: 'sup-001', name: 'Onions', category: 'Fresh Produce', stockQty: 560, unit: 'kg', reorderThreshold: 150, status: 'In Stock', updatedAt: '2026-06-22T06:00:00Z' },
-  { id: 'inv-007', supplierId: 'sup-001', name: 'Arabic Flatbread', category: 'Bakery & Bread', stockQty: 80, unit: 'pcs', reorderThreshold: 100, status: 'Low Stock', updatedAt: '2026-06-22T06:00:00Z' },
-  { id: 'inv-008', supplierId: 'sup-002', name: 'Hammour Fish', category: 'Seafood', stockQty: 120, unit: 'kg', reorderThreshold: 50, status: 'In Stock', updatedAt: '2026-06-22T05:00:00Z' },
-  { id: 'inv-009', supplierId: 'sup-002', name: 'Prawns', category: 'Seafood', stockQty: 45, unit: 'kg', reorderThreshold: 50, status: 'Low Stock', updatedAt: '2026-06-22T05:00:00Z' },
-  { id: 'inv-010', supplierId: 'sup-002', name: 'Whole Chicken', category: 'Meat & Poultry', stockQty: 200, unit: 'pcs', reorderThreshold: 100, status: 'In Stock', updatedAt: '2026-06-22T05:00:00Z' },
+  { id: 'inv-001', supplierId: 'sup-001', name: 'Tomatoes',       category: 'Fresh Produce',   stockQty: 450, unit: 'kg',      reorderThreshold: 100, status: 'In Stock',     unitCost: 2.5,  sellPrice: 4.0,  expiryDate: '2026-07-20', batchNumber: 'LOT-0718-A', updatedAt: '2026-06-22T06:00:00Z' },
+  { id: 'inv-002', supplierId: 'sup-001', name: 'Cucumbers',      category: 'Fresh Produce',   stockQty: 280, unit: 'kg',      reorderThreshold: 80,  status: 'In Stock',     unitCost: 1.8,  sellPrice: 3.2,  expiryDate: '2026-07-19', batchNumber: 'LOT-0718-B', updatedAt: '2026-06-22T06:00:00Z' },
+  { id: 'inv-003', supplierId: 'sup-001', name: 'Fresh Mint',     category: 'Herbs & Spices',  stockQty: 35,  unit: 'bunches', reorderThreshold: 40,  status: 'Low Stock',    unitCost: 0.5,  sellPrice: 1.5,  expiryDate: '2026-07-18', batchNumber: 'LOT-0717-C', updatedAt: '2026-06-22T06:00:00Z' },
+  { id: 'inv-004', supplierId: 'sup-001', name: 'Coriander',      category: 'Herbs & Spices',  stockQty: 0,   unit: 'bunches', reorderThreshold: 30,  status: 'Out of Stock', unitCost: 0.4,  sellPrice: 1.2,  expiryDate: null,         batchNumber: null,          updatedAt: '2026-06-21T18:00:00Z' },
+  { id: 'inv-005', supplierId: 'sup-001', name: 'Potatoes',       category: 'Fresh Produce',   stockQty: 820, unit: 'kg',      reorderThreshold: 200, status: 'In Stock',     unitCost: 1.2,  sellPrice: 2.2,  expiryDate: '2026-07-30', batchNumber: 'LOT-0715-A', updatedAt: '2026-06-22T06:00:00Z' },
+  { id: 'inv-006', supplierId: 'sup-001', name: 'Onions',         category: 'Fresh Produce',   stockQty: 560, unit: 'kg',      reorderThreshold: 150, status: 'In Stock',     unitCost: 0.9,  sellPrice: 1.8,  expiryDate: '2026-08-05', batchNumber: 'LOT-0710-A', updatedAt: '2026-06-22T06:00:00Z' },
+  { id: 'inv-007', supplierId: 'sup-001', name: 'Arabic Flatbread', category: 'Bakery & Bread', stockQty: 80, unit: 'pcs',     reorderThreshold: 100, status: 'Low Stock',    unitCost: 0.3,  sellPrice: 0.8,  expiryDate: '2026-07-18', batchNumber: 'LOT-0718-D', updatedAt: '2026-06-22T06:00:00Z' },
+  { id: 'inv-008', supplierId: 'sup-002', name: 'Hammour Fish',   category: 'Seafood',          stockQty: 120, unit: 'kg',      reorderThreshold: 50,  status: 'In Stock',     unitCost: 38.0, sellPrice: 65.0, expiryDate: '2026-07-19', batchNumber: 'LOT-0718-E', updatedAt: '2026-06-22T05:00:00Z' },
+  { id: 'inv-009', supplierId: 'sup-002', name: 'Prawns',         category: 'Seafood',          stockQty: 45,  unit: 'kg',      reorderThreshold: 50,  status: 'Low Stock',    unitCost: 28.0, sellPrice: 48.0, expiryDate: '2026-07-20', batchNumber: 'LOT-0718-F', updatedAt: '2026-06-22T05:00:00Z' },
+  { id: 'inv-010', supplierId: 'sup-002', name: 'Whole Chicken',  category: 'Meat & Poultry',   stockQty: 200, unit: 'pcs',     reorderThreshold: 100, status: 'In Stock',     unitCost: 18.0, sellPrice: 28.0, expiryDate: '2026-07-21', batchNumber: 'LOT-0718-G', updatedAt: '2026-06-22T05:00:00Z' },
 ]
 
 // ─── WhatsApp Log ─────────────────────────────────────────────────────────────
 
 export const MOCK_WHATSAPP_LOG: WhatsAppMessage[] = [
-  { id: 'wa-001', restaurantId: 'res-001', restaurantName: 'Taj Hotel Kitchen', type: 'Voice', transcriptPreview: '20 kilo tomatoes, 15 kilo cucumber, 5 bunches mint please', parsed: true, status: 'Delivered', orderId: 'DF-4821', receivedAt: '2026-06-22T05:02:00Z' },
+  { id: 'wa-001', restaurantId: 'res-001', restaurantName: 'Taj Hotel Kitchen', type: 'Voice', transcriptPreview: '20 kilo tomatoes, 15 kilo cucumber, 5 bunches mint please', parsed: true, status: 'Confirmed', orderId: 'DF-4821', receivedAt: '2026-06-22T05:02:00Z' },
   { id: 'wa-002', restaurantId: 'res-002', restaurantName: 'Marina Restaurant', type: 'Voice', transcriptPreview: 'We need 10 kg hammour and 5 kg prawns for tonight', parsed: true, status: 'Confirmed', orderId: 'DF-4820', receivedAt: '2026-06-22T06:10:00Z' },
   { id: 'wa-003', restaurantId: 'res-004', restaurantName: 'Sheikh Zayed Bistro', type: 'Voice', transcriptPreview: '8 kg lamb leg and 50 flatbreads, same as last week', parsed: true, status: 'Pending', orderId: 'DF-4818', receivedAt: '2026-06-22T07:28:00Z' },
-  { id: 'wa-004', restaurantId: 'res-005', restaurantName: 'Deira Palace Hotel', type: 'Text', transcriptPreview: 'Morning order: 30 chickens + 15kg beef mince', parsed: true, status: 'Delivered', orderId: 'DF-4817', receivedAt: '2026-06-21T04:58:00Z' },
+  { id: 'wa-004', restaurantId: 'res-005', restaurantName: 'Deira Palace Hotel', type: 'Text', transcriptPreview: 'Morning order: 30 chickens + 15kg beef mince', parsed: true, status: 'Confirmed', orderId: 'DF-4817', receivedAt: '2026-06-21T04:58:00Z' },
 ]
 
 // ─── Analytics ────────────────────────────────────────────────────────────────

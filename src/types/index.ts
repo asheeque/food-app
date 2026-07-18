@@ -24,6 +24,10 @@ export interface OrderItem {
   notes?: string
   /** AI confidence 0–1, present on WhatsApp voice orders */
   confidence?: number
+  /** inventory.id this line was ordered from — used to decrement stock on confirm */
+  itemId?: string
+  /** AED sell price per unit, snapshotted at order time for the receipt */
+  unitPrice?: number | null
 }
 
 export interface Order {
@@ -33,8 +37,12 @@ export interface Order {
   supplierId: string
   supplierName: string
   status: OrderStatus
-  /** Amount in AED */
+  /** Amount in AED, inclusive of tax */
   amount: number
+  /** AED VAT portion of amount */
+  taxAmount: number
+  /** Delivery address snapshotted at order time */
+  deliveryAddress: string | null
   items: OrderItem[]
   source: OrderSource
   createdAt: string // ISO string
@@ -70,6 +78,16 @@ export interface Restaurant {
   gmv: number
 }
 
+/** A saved delivery location a restaurant can pick from at checkout. */
+export interface RestaurantAddress {
+  id: string
+  restaurantId: string
+  label: string
+  addressLine: string
+  isDefault: boolean
+  createdAt: string
+}
+
 // ─── Suppliers ───────────────────────────────────────────────────────────────
 
 export interface Supplier {
@@ -102,24 +120,46 @@ export interface InventoryItem {
   category: string
   stockQty: number
   unit: string
-  /** Reorder below this qty */
   reorderThreshold: number
   status: StockStatus
+  /** AED purchase cost per unit */
+  unitCost: number | null
+  /** AED selling price per unit */
+  sellPrice: number | null
+  /** ISO date string, null if not perishable */
+  expiryDate: string | null
+  /** Lot / batch reference for traceability */
+  batchNumber: string | null
   updatedAt: string
+}
+
+/** A single received lot of an inventory item — tracked separately so restocking never overwrites an earlier batch's expiry/cost. */
+export interface InventoryBatch {
+  id: string
+  inventoryId: string
+  supplierId: string
+  qty: number
+  unitCost: number | null
+  expiryDate: string | null
+  batchNumber: string | null
+  receivedAt: string
 }
 
 // ─── WhatsApp Log ─────────────────────────────────────────────────────────────
 
 export type MessageType = 'Voice' | 'Text'
 
+/** Pending: awaiting restaurant CONFIRM/CANCEL. Confirmed: order created. Failed: transcription/parsing error. */
+export type WhatsAppLogStatus = 'Pending' | 'Confirmed' | 'Cancelled' | 'Failed'
+
 export interface WhatsAppMessage {
   id: string
-  restaurantId: string
+  restaurantId: string | null
   restaurantName: string
   type: MessageType
   transcriptPreview: string
   parsed: boolean
-  status: OrderStatus
+  status: WhatsAppLogStatus
   orderId?: string
   receivedAt: string
 }

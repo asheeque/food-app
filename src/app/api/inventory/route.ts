@@ -4,7 +4,8 @@ export const GET = withSupabase({ auth: 'user' }, async (req, ctx) => {
   const { searchParams } = new URL(req.url)
   const supplierId = searchParams.get('supplier_id')
 
-  let q = ctx.supabase.from('inventory').select('*')
+  // Use admin to bypass RLS so restaurant users can browse all suppliers' inventory
+  let q = ctx.supabaseAdmin.from('inventory').select('*')
   if (supplierId) q = q.eq('supplier_id', supplierId)
 
   const { data, error } = await q.order('name')

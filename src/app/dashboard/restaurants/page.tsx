@@ -2,7 +2,7 @@
 
 import { useRestaurants, useAddRestaurant, useUpdateRestaurant } from '@/hooks/useRestaurants'
 import { useSuppliers } from '@/hooks/useSuppliers'
-import { formatAED } from '@/lib/utils'
+import { formatAED, authedFetch } from '@/lib/utils'
 import { useState, useCallback } from 'react'
 import type { Restaurant } from '@/types'
 
@@ -157,7 +157,7 @@ export default function RestaurantsPage() {
     const result = await addRestaurantAsync(data)
     if (data.inviteEmail) {
       setInviteStatus('Sending invite…')
-      const res = await fetch('/api/admin/invite', {
+      const res = await authedFetch('/api/admin/invite', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: data.inviteEmail, role: 'restaurant', entityId: result.id, name: data.name }),

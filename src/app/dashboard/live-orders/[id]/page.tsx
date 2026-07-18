@@ -5,7 +5,6 @@ import { useRestaurant } from '@/hooks/useRestaurants'
 import { useSupplier } from '@/hooks/useSuppliers'
 import { formatAED, formatDateTime } from '@/lib/utils'
 import Link from 'next/link'
-import { use } from 'react'
 
 const STATUS_STYLE: Record<string, { bg: string; text: string; dot: string }> = {
   Delivered: { bg: 'rgba(74,124,92,0.10)',  text: '#2D6A4F', dot: '#2D6A4F' },
@@ -22,8 +21,8 @@ const TIMELINE = [
   { label: 'Delivered',        done: false },
 ]
 
-export default function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
+export default function OrderDetailPage({ params }: { params: { id: string } }) {
+  const { id } = params
   const { data: order }          = useOrder(id)
   const { data: restaurant }     = useRestaurant(order?.restaurantId ?? '')
   const { data: supplier }       = useSupplier(order?.supplierId ?? '')

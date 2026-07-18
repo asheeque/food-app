@@ -4,6 +4,7 @@ import { useOrders } from '@/hooks/useOrders'
 import { useAppStore, selectEntityId } from '@/store/useAppStore'
 import { formatAED, formatDateTime } from '@/lib/utils'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import type { OrderStatus } from '@/types'
 
 const STATUS_STYLE: Record<string, { bg: string; text: string; dot: string }> = {
@@ -16,6 +17,7 @@ const STATUS_STYLE: Record<string, { bg: string; text: string; dot: string }> = 
 const FILTERS: (OrderStatus | 'All')[] = ['All', 'Pending', 'Confirmed', 'Delivered', 'Cancelled']
 
 export default function RestaurantOrdersPage() {
+  const router              = useRouter()
   const restaurantId        = useAppStore(selectEntityId) ?? 'res-001'
   const { data: allOrders } = useOrders({ restaurantId })
   const [filter, setFilter] = useState<OrderStatus | 'All'>('All')
@@ -74,7 +76,8 @@ export default function RestaurantOrdersPage() {
               return (
                 <tr
                   key={order.id}
-                  className="hover:bg-[#F9FAFB] transition-colors"
+                  onClick={() => router.push(`/restaurant/dashboard/orders/${order.id}`)}
+                  className="hover:bg-[#F9FAFB] transition-colors cursor-pointer"
                   style={{
                     backgroundColor: idx % 2 === 0 ? '#ffffff' : '#FAFAF9',
                     borderTop: '1px solid #E5E7EB',

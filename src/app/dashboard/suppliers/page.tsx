@@ -1,6 +1,7 @@
 'use client'
 
 import { useSuppliers, useAddSupplier, useUpdateSupplier } from '@/hooks/useSuppliers'
+import { authedFetch } from '@/lib/utils'
 import { useState, useCallback } from 'react'
 import type { Supplier } from '@/types'
 
@@ -151,7 +152,7 @@ export default function SuppliersPage() {
     const result = await addSupplierAsync(data)
     if (data.inviteEmail) {
       setInviteStatus('Sending invite…')
-      const res = await fetch('/api/admin/invite', {
+      const res = await authedFetch('/api/admin/invite', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: data.inviteEmail, role: 'supplier', entityId: result.id, name: data.businessName }),

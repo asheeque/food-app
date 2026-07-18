@@ -2,24 +2,38 @@
 
 import { useWhatsAppLog } from '@/hooks/useWhatsAppLog'
 import { formatDateTime } from '@/lib/utils'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const STATUS_STYLE: Record<string, { bg: string; text: string; dot: string }> = {
-  Delivered: { bg: 'rgba(74,124,92,0.10)',  text: '#2D6A4F', dot: '#2D6A4F' },
   Confirmed: { bg: 'rgba(29,58,80,0.08)',   text: '#1D3A50', dot: '#1D3A50' },
   Pending:   { bg: 'rgba(245,158,11,0.10)', text: '#92400E', dot: '#D97706' },
   Cancelled: { bg: 'rgba(239,68,68,0.10)',  text: '#991B1B', dot: '#EF4444' },
+  Failed:    { bg: 'rgba(239,68,68,0.10)',  text: '#991B1B', dot: '#EF4444' },
+}
+
+interface WhatsAppStatus {
+  webhookConfigured: boolean
+  phoneNumberConfigured: boolean
+  openaiConfigured: boolean
 }
 
 export default function WhatsAppLogPage() {
   const { data: messages } = useWhatsAppLog()
   const [search, setSearch] = useState('')
+  const [status, setStatus] = useState<WhatsAppStatus | null>(null)
+
+  useEffect(() => {
+    fetch('/api/whatsapp/status')
+      .then((r) => r.json())
+      .then(setStatus)
+      .catch(() => setStatus(null))
+  }, [])
 
   const INTEGRATIONS = [
-    { label: 'Webhook',       value: 'Pending setup', ok: false },
-    { label: 'Phone number',  value: 'Not configured', ok: false },
-    { label: 'Whisper (STT)', value: 'Pending setup', ok: false },
-    { label: 'GPT-4o',        value: 'Pending setup', ok: false },
+    { label: 'Webhook',       value: status?.webhookConfigured ? 'Configured' : 'Pending setup',   ok: !!status?.webhookConfigured },
+    { label: 'Phone number',  value: status?.phoneNumberConfigured ? 'Configured' : 'Not configured', ok: !!status?.phoneNumberConfigured },
+    { label: 'Whisper (STT)', value: status?.openaiConfigured ? 'Configured' : 'Pending setup',    ok: !!status?.openaiConfigured },
+    { label: 'GPT-4o',        value: status?.openaiConfigured ? 'Configured' : 'Pending setup',    ok: !!status?.openaiConfigured },
     { label: 'Total',         value: `${messages.length} messages`, ok: true },
   ]
 

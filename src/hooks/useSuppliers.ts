@@ -2,11 +2,12 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase/client'
+import { authedFetch } from '@/lib/utils'
 import { mapSupplier } from '@/lib/supabase/mappers'
 import type { Supplier } from '@/types'
 
 async function fetchSuppliers(params: URLSearchParams) {
-  const res = await fetch(`/api/suppliers?${params.toString()}`)
+  const res = await authedFetch(`/api/suppliers?${params.toString()}`)
   if (!res.ok) throw new Error('Failed to fetch suppliers')
   const data = await res.json()
   return Array.isArray(data) ? (data as object[]).map(mapSupplier) : [mapSupplier(data)]
@@ -28,7 +29,7 @@ export function useSupplier(id: string) {
   const query = useQuery({
     queryKey: ['suppliers', id],
     queryFn: async () => {
-      const res = await fetch(`/api/suppliers?id=${encodeURIComponent(id)}`)
+      const res = await authedFetch(`/api/suppliers?id=${encodeURIComponent(id)}`)
       if (!res.ok) throw new Error('Failed to fetch supplier')
       return mapSupplier(await res.json())
     },
