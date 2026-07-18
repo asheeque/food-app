@@ -113,6 +113,7 @@ export default function OrderDetailPage({ params }: { params: { id: string } }) 
                 </span>
               </div>
             </div>
+            <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr style={{ backgroundColor: '#F9FAFB', borderBottom: '1px solid #E5E7EB' }}>
@@ -153,6 +154,7 @@ export default function OrderDetailPage({ params }: { params: { id: string } }) 
                 </tr>
               </tfoot>
             </table>
+            </div>
           </section>
 
           {/* Timeline */}

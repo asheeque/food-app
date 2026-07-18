@@ -404,7 +404,7 @@ export default function PlaceOrderPage() {
                 {displayItems.length} result{displayItems.length !== 1 ? 's' : ''}
                 {search ? ` for "${search}"` : ''}
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                 {displayItems.map((item) => (
                   <ItemCard
                     key={item.id}
@@ -495,7 +495,7 @@ export default function PlaceOrderPage() {
               ) : displayItems.length === 0 ? (
                 <p className="text-sm text-center py-8" style={{ color: '#9CA3AF' }}>No items match your filter.</p>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                   {displayItems.map((item) => (
                     <ItemCard
                       key={item.id}

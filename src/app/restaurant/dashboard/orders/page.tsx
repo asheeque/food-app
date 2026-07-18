@@ -55,7 +55,7 @@ export default function RestaurantOrdersPage() {
         ))}
       </div>
 
-      <div className="rounded-xl overflow-hidden" style={{ border: '1px solid #E5E7EB' }}>
+      <div className="rounded-xl overflow-x-auto" style={{ border: '1px solid #E5E7EB' }}>
         <table className="w-full text-sm">
           <thead>
             <tr style={{ backgroundColor: '#F9FAFB', borderBottom: '1px solid #E5E7EB' }}>

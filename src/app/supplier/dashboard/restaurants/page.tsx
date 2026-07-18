@@ -30,7 +30,7 @@ export default function SupplierRestaurantsPage() {
       </div>
 
       {/* Summary strip */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {[
           { label: 'Linked restaurants', value: String(restaurants.length) },
           { label: 'Active',             value: String(restaurants.filter((r) => r.active).length) },
@@ -44,7 +44,7 @@ export default function SupplierRestaurantsPage() {
       </div>
 
       {/* Restaurant list */}
-      <div className="rounded-xl overflow-hidden" style={{ border: '1px solid #E5E7EB' }}>
+      <div className="rounded-xl overflow-x-auto" style={{ border: '1px solid #E5E7EB' }}>
         <table className="w-full text-sm">
           <thead>
             <tr style={{ backgroundColor: '#F9FAFB', borderBottom: '1px solid #E5E7EB' }}>

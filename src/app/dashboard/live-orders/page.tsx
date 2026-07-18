@@ -52,7 +52,7 @@ export default function LiveOrdersPage() {
       </div>
 
       {/* Kanban board */}
-      <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-4 min-h-0">
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 min-h-0 items-start content-start md:items-stretch md:content-stretch">
         {columns.map((col) => (
           <div key={col.key} className="flex flex-col rounded-xl overflow-hidden" style={{ border: '1px solid #E5E7EB' }}>
 

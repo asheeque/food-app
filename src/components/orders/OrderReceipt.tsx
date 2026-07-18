@@ -75,6 +75,7 @@ export function OrderReceipt({
             <div className="px-5 py-4" style={{ borderBottom: '1px solid #E5E7EB' }}>
               <h2 className="text-sm font-semibold" style={{ color: '#111827' }}>Items</h2>
             </div>
+            <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr style={{ backgroundColor: '#F9FAFB', borderBottom: '1px solid #E5E7EB' }}>
@@ -114,6 +115,7 @@ export function OrderReceipt({
                 </tr>
               </tfoot>
             </table>
+            </div>
           </section>
         </div>
 

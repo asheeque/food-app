@@ -56,7 +56,7 @@ export default function WhatsAppLogPage() {
       </div>
 
       {/* Status strip */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
         {INTEGRATIONS.map(({ label, value, ok }) => (
           <div key={label} className="rounded-xl px-4 py-3 bg-white flex flex-col gap-1" style={{ border: '1px solid #E5E7EB' }}>
             <p className="text-[11px] font-semibold uppercase tracking-[0.1em]" style={{ color: '#6B7280' }}>{label}</p>
@@ -85,7 +85,7 @@ export default function WhatsAppLogPage() {
 
       {/* Log table */}
       <section aria-label="WhatsApp message log">
-        <div className="rounded-xl overflow-hidden" style={{ border: '1px solid #E5E7EB' }}>
+        <div className="rounded-xl overflow-x-auto" style={{ border: '1px solid #E5E7EB' }}>
           <table className="w-full text-sm">
             <thead>
               <tr style={{ backgroundColor: '#F9FAFB', borderBottom: '1px solid #E5E7EB' }}>
