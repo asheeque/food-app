@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,600;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root Variables */
+:root {
+  /* Editorial palette */
+  --color-parchment: #F8F5EE;
+  --color-linen: #EDE7D9;
+  --color-umber: #7C4A25;
+  --color-creek: #1D3A50;
+  --color-ink: #1E1612;
+  --color-stone: #8A7665;
+
+  /* Semantic */
+  --color-primary: #C9943E;
+  --color-primary-hover: #B07D2E;
+  --color-error: #C4622D;
+  --color-success: #4a7c5c;
+  --color-warning: #f59e0b;
+
+  /* v2 design system tokens */
+  --color-bg:        #FAFAF9;
+  --color-card:      #FFFFFF;
+  --color-border-v2: #E5E7EB;
+  --color-tbl-head:  #F9FAFB;
+  --color-text-pri:  #111827;
+  --color-text-sec:  #6B7280;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Typography */
+  --font-display: 'EB Garamond', Georgia, serif;
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+/* Hero load animation — only the headline uses this */
+@keyframes heroUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-up {
+  animation: heroUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-up {
+    animation: none;
+  }
+}
+
+/* Base Styles */
+* {
+  @apply border-neutral-200;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply scroll-smooth;
+  background-color: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: var(--font-family);
+  line-height: 1.6;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-semibold text-on-surface;
+  line-height: 1.2;
+}
+
+h1 {
+  @apply text-headline-xl;
+}
+
+h2 {
+  @apply text-headline-lg;
+}
+
+h3 {
+  @apply text-lg font-semibold;
+}
+
+/* Links */
+a {
+  @apply text-primary-500 hover:text-primary-700 transition-colors duration-fast;
+}
+
+/* Buttons base */
+button {
+  @apply transition-all duration-fast;
+}
+
+/* Form Elements */
+input,
+textarea,
+select {
+  @apply font-sans;
+  &:focus {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+}
+
+/* Tables */
+table {
+  @apply w-full border-collapse;
+}
+
+th {
+  @apply font-semibold text-left;
+}
+
+/* Utilities */
+.container-max {
+  @apply max-w-container mx-auto px-4;
+}
+
+.flex-center {
+  @apply flex items-center justify-center;
+}
+
+.flex-between {
+  @apply flex items-center justify-between;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    @apply opacity-0;
+  }
+  to {
+    @apply opacity-100;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    @apply translate-y-4 opacity-0;
+  }
+  to {
+    @apply translate-y-0 opacity-100;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideInUp 0.3s ease-in-out;
+}
+
+/* Mobile-first responsive utilities */
+@media (max-width: 768px) {
+  body {
+    @apply text-sm;
+  }
+
+  h1 {
+    @apply text-headline-lg;
+  }
+}
