@@ -74,12 +74,12 @@ export default function AnalyticsPage() {
           <p className="text-sm py-8 text-center" style={{ color: '#9CA3AF' }}>No revenue data yet.</p>
         ) : (
           <>
-            <div className="flex items-end gap-2 h-36" aria-hidden="true">
+            <div className="flex items-stretch gap-2 h-[9rem]" aria-hidden="true">
               {dailyRevenue.map((d) => {
                 const isPeak = d.amount === maxRevenue
                 const height = barWidth(d.amount, maxRevenue)
                 return (
-                  <div key={d.date} className="flex-1 flex flex-col items-center gap-1">
+                  <div key={d.date} className="flex-1 flex flex-col justify-end items-center gap-1">
                     <div
                       className="w-full rounded-t-sm"
                       style={{ height, backgroundColor: isPeak ? '#C9943E' : '#1D3A50', opacity: isPeak ? 1 : 0.55, minHeight: '4px' }}

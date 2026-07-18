@@ -185,7 +185,7 @@ export function DashboardShell({ navItems, portalLabel, children }: DashboardShe
 
       {/* ── Sidebar (desktop) ── */}
       <aside
-        className="hidden md:flex w-56 shrink-0 flex-col bg-creek-500"
+        className="hidden md:flex w-[14rem] shrink-0 flex-col bg-creek-500"
         style={{ borderRight: '1px solid rgba(255,255,255,0.06)' }}
         aria-label={`${portalLabel} navigation`}
       >
@@ -208,7 +208,7 @@ export function DashboardShell({ navItems, portalLabel, children }: DashboardShe
             aria-hidden="true"
           />
           <aside
-            className="fixed inset-y-0 left-0 w-64 max-w-[80vw] flex flex-col bg-creek-500 shadow-2xl"
+            className="fixed inset-y-0 left-0 w-[16rem] max-w-[80vw] flex flex-col bg-creek-500 shadow-2xl"
             aria-label={`${portalLabel} navigation`}
           >
             <SidebarContent

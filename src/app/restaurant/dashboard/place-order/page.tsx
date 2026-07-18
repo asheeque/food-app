@@ -530,7 +530,7 @@ export default function PlaceOrderPage() {
               </button>
             </div>
 
-            <div className="px-5 py-2 max-h-72 overflow-y-auto">
+            <div className="px-5 py-2 max-h-[18rem] overflow-y-auto">
               {cartLines.map((line, idx) => (
                 <div key={line.item.id} className="flex items-center gap-3 py-2.5" style={{ borderTop: idx > 0 ? '1px solid #F3F4F6' : 'none' }}>
                   <div className="flex-1 min-w-0">

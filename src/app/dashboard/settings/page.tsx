@@ -677,14 +677,17 @@ export default function SettingsPage() {
         </h1>
       </div>
 
-      <div className="flex gap-8 items-start">
-        <nav className="shrink-0 w-44 flex flex-col gap-0.5" aria-label="Settings sections">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start">
+        <nav
+          className="flex flex-row md:flex-col gap-1 md:gap-0.5 overflow-x-auto md:overflow-visible w-full md:w-[11rem] shrink-0"
+          aria-label="Settings sections"
+        >
           {NAV_TABS.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               type="button"
-              className="text-left px-3 py-2.5 rounded-lg text-sm transition-colors"
+              className="text-left px-3 py-2.5 rounded-lg text-sm transition-colors whitespace-nowrap shrink-0"
               style={{
                 backgroundColor: activeTab === tab ? 'rgba(29,58,80,0.08)' : 'transparent',
                 color: activeTab === tab ? '#1D3A50' : '#6B7280',
@@ -697,7 +700,7 @@ export default function SettingsPage() {
           ))}
         </nav>
 
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 w-full">
           {renderTab()}
         </div>
       </div>

@@ -51,8 +51,8 @@ export default function LiveOrdersPage() {
         </div>
       </div>
 
-      {/* Kanban board */}
-      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 min-h-0 items-start content-start md:items-stretch md:content-stretch">
+      {/* Kanban board — each column caps its own height and scrolls internally, at every breakpoint */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-start">
         {columns.map((col) => (
           <div key={col.key} className="flex flex-col rounded-xl overflow-hidden" style={{ border: '1px solid #E5E7EB' }}>
 
@@ -67,8 +67,8 @@ export default function LiveOrdersPage() {
               </span>
             </div>
 
-            {/* Cards */}
-            <div className={`flex-1 overflow-y-auto p-3 space-y-3 ${col.colBg}`} style={{ minHeight: 0 }}>
+            {/* Cards — capped height, scrolls internally instead of stretching or growing the page */}
+            <div className={`overflow-y-auto p-3 space-y-3 ${col.colBg}`} style={{ maxHeight: '480px' }}>
               {col.orders.length === 0 ? (
                 <p className="text-center text-xs py-8" style={{ color: '#9CA3AF' }}>No orders</p>
               ) : col.orders.map((order) => (
