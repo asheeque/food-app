@@ -243,7 +243,7 @@ function SecurityTab() {
 
 function WhatsAppAPITab() {
   const appUrl    = process.env.NEXT_PUBLIC_APP_URL ?? 'https://your-domain.com'
-  const webhookUrl = `${appUrl}/api/webhook/whatsapp`
+  const webhookUrl = `${appUrl}/api/whatsapp/webhook`
 
   const fields = [
     { label: 'Webhook URL',    value: webhookUrl,       hint: 'Paste this into Meta → WhatsApp → Configuration → Webhook URL' },
@@ -562,7 +562,7 @@ function IntegrationsTab() {
   const [revealed, setRevealed] = useState(false)
   const maskedKey  = 'df_live_••••••••••••••••••••••••••••••'
   const revealedKey = 'df_live_demo_key_not_yet_configured'
-  const webhookUrl  = `${process.env.NEXT_PUBLIC_APP_URL ?? 'https://your-domain.com'}/api/webhook/whatsapp`
+  const webhookUrl  = `${process.env.NEXT_PUBLIC_APP_URL ?? 'https://your-domain.com'}/api/whatsapp/webhook`
 
   return (
     <div className="flex flex-col gap-6">
